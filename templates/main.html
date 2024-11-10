@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+        }
+        .recommended-papers {
+            margin-top: 10px;
+        }
+        .recommended-papers li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .recommended-papers li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Get Research Paper Recommendations</h1>
+
+        <form id="fraudForm">
+            <label for="input_paper">Enter a Research Paper Title</label>
+            <input type="text" id="input_paper" name="input_paper" required>
+
+            <button type="button" onclick="checkFraud()">Get Recommendations</button>
+        </form>
+
+        <div id="responseContainer" class="response">
+            <h3>Recommended Papers:</h3>
+            <ul id="recommendedPapersList" class="recommended-papers"></ul>
+        </div>
+    </div>
+
+    <script>
+        function checkFraud() {
+            const input_paper = document.getElementById('input_paper').value;
+
+            // Check if the input paper is not empty
+            if (!input_paper) {
+                alert('Please enter a research paper title.');
+                return;
+            }
+
+            // Make an API request to get recommendations
+            fetch('/check_fraud', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ input_paper: input_paper })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseContainer = document.getElementById('responseContainer');
+                const recommendedPapersList = document.getElementById('recommendedPapersList');
+
+                // Clear the previous results
+                recommendedPapersList.innerHTML = '';
+
+                // Display the recommendations
+                if (data.recommended_papers && data.recommended_papers.length > 0) {
+                    data.recommended_papers.forEach(paper => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = paper;
+                        recommendedPapersList.appendChild(listItem);
+                    });
+                    responseContainer.style.display = 'block';
+                } else {
+                    responseContainer.style.display = 'block';
+                    recommendedPapersList.innerHTML = '<li>No recommendations found.</li>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const responseContainer = document.getElementById('responseContainer');
+                responseContainer.style.display = 'block';
+                responseContainer.innerHTML = 'An error occurred. Please try again.';
+            });
+        }
+    </script>
+
+</body>
+</html>
