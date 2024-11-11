@@ -37,12 +37,11 @@ It's recommended to use a virtual environment to manage dependencies.
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
 ```
 
 ### 3. Set Up Model Files
 
-Ensure that your model files are placed in the `Models` directory:
+Ensure that your model files are placed in the same directory:
 - `embeddings.pkl`: Precomputed embeddings for research papers.
 - `sentences.pkl`: List of titles of the research papers.
 - `rec_model.pkl`: Trained recommendation model.
@@ -53,7 +52,7 @@ Ensure that your model files are placed in the `Models` directory:
 
 To start the Flask app, use:
 ```bash
-python app.py
+python main.py
 ```
 
 The app will run at `http://127.0.0.1:5000`.
