@@ -1,4 +1,3 @@
-```markdown
 # Research Paper Recommendation System
 
 This project is a Flask-based web application that provides research paper recommendations based on an input paper title. Users can enter a research paper title, and the app will suggest similar papers using a pre-trained recommendation model.
