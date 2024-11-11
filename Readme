@@ -1,4 +1,4 @@
-
+```markdown
 # Research Paper Recommendation System
 
 This project is a Flask-based web application that provides research paper recommendations based on an input paper title. Users can enter a research paper title, and the app will suggest similar papers using a pre-trained recommendation model.
@@ -16,6 +16,13 @@ This project is a Flask-based web application that provides research paper recom
 - **Torch**: For loading and running the recommendation model.
 - **Additional Libraries**: `pandas`, `json`, `pickle`
 
+### Detailed Libraries:
+- `Flask`: To create the web server and handle requests.
+- `pandas`: For data handling and preprocessing, if required.
+- `torch`: For using the recommendation model (PyTorch).
+- `sentence-transformers`: If using Sentence Transformers in PyTorch for encoding.
+- `pickle`: To load and save model files and embeddings (included in Python's standard library).
+- `json`: For handling JSON requests and responses (also part of Python's standard library).
 
 ## Getting Started
 
@@ -28,19 +35,10 @@ cd research-paper-recommendation-system
 ### 2. Install Dependencies
 It's recommended to use a virtual environment to manage dependencies.
 
-Requirements: 
-
-Flask: To create the web server and handle requests.
-pandas: For data handling and preprocessing if required.
-torch: For using the recommendation model (PyTorch).
-sentence-transformers (if using Sentence Transformers in PyTorch for encoding)
-pickle: To load and save model files and embeddings (included in Python's standard library).
-json: For handling JSON requests and responses (also part of Python's standard library).
-
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-Install the requirements using pip 
+pip install -r requirements.txt
 ```
 
 ### 3. Set Up Model Files
@@ -74,37 +72,7 @@ The app will run at `http://127.0.0.1:5000`.
 3. The model calculates cosine similarity scores between the input and existing paper embeddings.
 4. The top 5 most similar papers are returned and displayed on the web page.
 
-## Screenshots
 
-### Home Page
-![Home Page](link_to_screenshot)
-
-### Recommendations Display
-![Recommendations](link_to_screenshot)
-
-## API Endpoints
-
-### `POST /check_fraud`
-
-- **Description**: Accepts a paper title and returns a list of similar research papers.
-- **Request**: JSON object containing the title of a research paper.
-  ```json
-  {
-      "input_paper": "Title of the research paper"
-  }
-  ```
-- **Response**: JSON object containing a list of recommended research paper titles.
-  ```json
-  {
-      "recommended_papers": [
-          "Recommended Paper 1",
-          "Recommended Paper 2",
-          "Recommended Paper 3",
-          "Recommended Paper 4",
-          "Recommended Paper 5"
-      ]
-  }
-  ```
 
 ## Troubleshooting
 
@@ -118,3 +86,4 @@ Feel free to submit issues or pull requests if you’d like to contribute to the
 ## License
 
 This project is open-source and available under the MIT License.
+```
